@@ -13,6 +13,7 @@
 
 <script>
 import ListOfGames from '@/components/ListOfGames'
+import { fetch } from 'http'
 export default {
   name: 'MainPage',
   data() {
