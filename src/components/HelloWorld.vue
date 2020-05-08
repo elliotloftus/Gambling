@@ -4,7 +4,7 @@
     <h1> Welcome to Hedge </h1>
   </div>
     <div class = "btn">
-      <v-btn class="ma-2" outlined color="indigo" v-on:click="getGames('https://api.the-odds-api.com/v3/odds/?apiKey=7f570b4ff2ebe690715570e96c537c21&sport=upcoming&region=uk')">Get betting data</v-btn>
+      <v-btn class="ma-2" outlined color="indigo" v-on:click="getGames()">Get betting data</v-btn>
     </div>
 
     <ListOfGames v-if="games" :gamesPassed="games"/>
@@ -13,7 +13,8 @@
 
 <script>
 import ListOfGames from '@/components/ListOfGames'
-import { fetch } from 'http'
+import * as axios from 'axios'
+import  {bettingApi}  from '@/config'
 export default {
   name: 'MainPage',
   data() {
@@ -26,11 +27,10 @@ export default {
   },
   components: { ListOfGames },
   methods: {
-    async getGames(url) {
+    async getGames() {
       try {
-        const response = await fetch(url);
-        const json = await response.json();
-        this.games =json.data;
+        const response = await axios.get(bettingApi);
+        this.games = response.data.data;
         console.log(this.games);
       } catch (error) {
         console.log(error);
