@@ -4,9 +4,11 @@ import router from './router'
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
-Vue.use(vuetify)
+import VueYouTubeEmbed from 'vue-youtube-embed'
+Vue.use(VueYouTubeEmbed)
 new Vue({
   el: '#app',
   router,
-  render: h =>(App)
-})
+  vuetify,
+  render: h => h(App)
+}).$mount('#app')
