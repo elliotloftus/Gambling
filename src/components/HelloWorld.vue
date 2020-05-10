@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class = "hedge">
-    <h1> Welcome to Hedge </h1>
+    <img src= '@/assets/Hedge.jpg'>
   </div>
     <div class = "btn">
       <v-btn class="ma-2" outlined color="indigo" v-on:click="getGames()">Get betting data</v-btn>

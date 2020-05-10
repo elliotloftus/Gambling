@@ -1,7 +1,12 @@
 <template>
   <v-app >
-    <v-toolbar max-height="65">
-      <v-toolbar-title class ="homeTitle"><a href="/" style="color: #5A2B81; text-decoration: none;"> Hedge</a></v-toolbar-title>
+    <v-toolbar max-height="65"> 
+        <v-img src= '@/assets/Hedge.jpg'
+            contain
+            position="left"
+            height="60px"
+            width="0px">
+        </v-img>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat to = "/" > Home </v-btn>
@@ -14,7 +19,7 @@
 
 <style>
   .homeTitle {
-    color: #5A2B81 !important 
+    height: 150px; 
   }
   /* Set a specific color for each brand */
   /* Facebook */
