@@ -4,7 +4,7 @@
         <v-img src= '@/assets/Hedge.jpg'
             contain
             position="left"
-            height="65px"
+            height="60px"
             width="0px">
         </v-img>
       <v-spacer></v-spacer>
