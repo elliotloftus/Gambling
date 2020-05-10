@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { getIdFromURL, getTimeFromURL } from 'vue-youtube-embed'
 export default {
     data() {
         return {
