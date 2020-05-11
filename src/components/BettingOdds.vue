@@ -111,8 +111,8 @@ export default {
                 {text: 'Over/Under # of McDobules', value: 'OverUnder'}
             ],
             contestents: [
-                {name: 'Nate', plusMinus: '-150', OverUnder: '12'},
-                {name: 'Frankie', plusMinus: '+140', OverUnder: '10'}
+                {name: 'Nate', plusMinus: '-180', OverUnder: '9.5'},
+                {name: 'Frankie', plusMinus: '+150', OverUnder: '7.5'}
             ],
             feedHeaders: [
                 {text: 'Name', value: `name`},
