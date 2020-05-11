@@ -9,8 +9,8 @@
         </v-img>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat to = "/" > Home </v-btn>
-      <v-btn flat to = "/coronavores" > Coronavores </v-btn>
+      <v-btn to = "/" > Home </v-btn>
+      <v-btn to = "/coronavores" > Coronavores </v-btn>
     </v-toolbar-items>
     </v-toolbar>
     <router-view/>  
