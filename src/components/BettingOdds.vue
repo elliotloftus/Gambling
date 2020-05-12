@@ -37,7 +37,7 @@
                 md="3"
                 >
                 <v-text-field
-                    v-model.number=selectedWager
+                    v-model.number="selectedWager"
                     label="Wager"
                     :rules="wagerRules"
                     required
@@ -73,8 +73,7 @@
         </v-card-text>
         <v-card-actions>
             <span class = "centered"> Potential Winnings : {{totalWinnings}}  </span>
-            <v-btn class="blue--text darken-1" v-on:click="submitBlog">Submit</v-btn>
-            <v-btn class="blue--text darken-1" v-on:click="dialog = false">Cancel</v-btn>
+            <v-btn class="blue--text darken-1" v-on:click="submitBet">Submit</v-btn>
             </span>
             <br>
         </v-card-actions>
@@ -102,6 +101,9 @@
 </template>
 
 <script>
+import  {eventId}  from '@/config'
+import  {coronavoresBackend}  from '@/config'
+import * as axios from 'axios'
 export default {
     data() {
         return {
@@ -121,13 +123,7 @@ export default {
                 {text: 'Bet Placed', value: 'betType'},
                 {text: 'Potential Winnings', value: 'winnings'}
             ],
-            bettingFeed: [
-                {name: 'Pat Maweini', amount: 100, betType: 'Over', contestant: 'Frankie', winnings: 200},
-                {name: 'Buster Cherry', amount: 100, betType: '+140', contestant: 'Frankie', winnings: 240},
-                {name: 'Craven Moorehead', amount: 100, betType: '-150', contestant: 'Nate', winnings: 150},
-                {name: 'Jack Oliver Body', amount: 100, betType: 'Under', contestant: 'Frankie', winnings: 200},
-                {name: 'Moe Lester', amount: 100, betType: 'Over', contestant: 'Nate', winnings: 200}
-            ],
+            bettingFeed: [],
             contesters: [
                 'Nate',
                 'Frankie'
@@ -145,8 +141,37 @@ export default {
         }
     },
     methods: {
-        submitBlog() {
-        
+        submitBet() {
+          const data = this.buildDataForPostCall()
+          console.log(data)
+          axios.post(coronavoresBackend, data).then(
+            response => {
+              console.log(response)
+              this.getBettingFeed()
+            }).catch(
+              error => {
+                console.log(error)
+              }
+            )
+        },
+        buildDataForPostCall() {
+          return {
+            'eventId': eventId,
+            'name': this.name,
+            'amount': this.selectedWager, 
+            'contestant': this.selectedContestent, 
+            'betType': this.selectedBet, 
+            'winnings':this.totalWinnings
+            }
+        },
+        async getBettingFeed() {
+          try {
+            const response = await axios.get(coronavoresBackend + eventId)
+            var data = response.data
+            this.bettingFeed = data
+          } catch (error) {
+            console.log(error);
+          }
         },
         calculateWinnings(betSelected,wagerSelected) {
             if (betSelected.startsWith('Over') || betSelected.startsWith('Under')) {
@@ -164,6 +189,9 @@ export default {
                 this.totalWinnings = Math.floor((wagerSelected / (odds/100))) + wagerSelected
             }
         }
+    },
+    mounted() {
+      this.getBettingFeed()
     },
     watch: {
         selectedContestent: function(thisContestent) {
